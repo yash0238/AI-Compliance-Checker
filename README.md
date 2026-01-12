@@ -1,1 +1,1 @@
-# AI-Compliance-Checker-
+# AI-Compliance-Checker
