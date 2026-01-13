@@ -59,23 +59,38 @@ This AI system leverages **Groq LLaMA 70B** and advanced NLP to automate end-to-
 ## 🏗️ How It Works
 
 The system operates through a **7-stage automated pipeline**:
+
     A[📄 Upload PDF] --> B[🔍 Extract Text]
+
     B --> C[🧹 Clean & Normalize]
+    
     C --> D[📑 Extract Clauses]
+    
     D --> E[⚠️ Risk Analysis]
+    
     E --> F[📡 Regulatory Check]
+    
     F --> G[✍️ Generate Amendments]
+    
     G --> H[📬 Notify & Report]
 
 
 Pipeline Breakdown
+
 PDF Extraction → Converts uploaded contracts to clean text
+
 Clause Identification → LLM reads contract semantically and extracts ~8-15 key clauses
+
 Risk Scoring → Dual-engine (Rule + LLM) assesses each clause for compliance violations
+
 Regulatory Sync → Live GDPR/HIPAA trackers detect regulatory changes
+
 Gap Analysis → Identifies missing or weak clauses
+
 Amendment Generation → AI rewrites problematic clauses with legal precision
+
 Reporting & Alerts → Pushes results to Slack, Email, Google Sheets + generates downloadable JSON/CSV/PDF
+
 
 ## 🌟 Key Features Deep Dive
 
@@ -102,3 +117,4 @@ Reporting & Alerts → Pushes results to Slack, Email, Google Sheets + generates
 # After (AI Rewrite)
 "Company's liability is capped at the total contract value, 
 excluding cases of gross negligence or willful misconduct."
+
