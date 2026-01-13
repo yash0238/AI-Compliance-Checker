@@ -1,0 +1,733 @@
+[
+  {
+    "clause_id": "1.1",
+    "clause_heading": "DEFINITIONS",
+    "clause_text": "1.1 \"Services\" means the hosted software platform offered by the Provider.",
+    "clause_type": "Other",
+    "rationale": "This clause is categorized as Other because it defines a key term in the agreement, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 5,
+      "risk_factors": [],
+      "missing_controls": [],
+      "regulation_violations": [],
+      "explanation": "This clause is a simple definition of services and does not impose any obligations or liabilities, thus it does not pose any significant legal or regulatory risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause is a simple definition of services and does not impose any obligations or liabilities, thus it does not pose any significant legal or regulatory risk."
+    }
+  },
+  {
+    "clause_id": "1.2",
+    "clause_heading": "DEFINITIONS",
+    "clause_text": "1.2 \"User Data\" means any data submitted or uploaded by Customer into the Services.",
+    "clause_type": "Other",
+    "rationale": "This clause is categorized as Other because it defines a key term in the agreement, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [
+        "Ambiguity in scope of User Data",
+        "Potential for sensitive data inclusion"
+      ],
+      "missing_controls": [
+        "Definition of sensitive data",
+        "Specification of data handling procedures"
+      ],
+      "regulation_violations": [
+        "GDPR: Article 4(1) - Lack of clear definition may impede compliance",
+        "HIPAA: 164.501 - Insufficient specification of protected health information"
+      ],
+      "explanation": "The clause defines User Data but lacks specificity, potentially leading to ambiguity in data handling and regulatory compliance, particularly under GDPR and HIPAA.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause defines User Data but lacks specificity, potentially leading to ambiguity in data handling and regulatory compliance, particularly under GDPR and HIPAA."
+    }
+  },
+  {
+    "clause_id": "1.3",
+    "clause_heading": "DEFINITIONS",
+    "clause_text": "1.3 \"Confidential Information\" means all non-public information disclosed by one party to another.",
+    "clause_type": "Confidentiality",
+    "rationale": "This clause is categorized as Confidentiality because it defines the scope of confidential information that is protected under the agreement.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 40,
+      "risk_factors": [
+        "Overly broad definition of Confidential Information",
+        "Lack of specificity regarding what constitutes non-public information",
+        "Potential for unintended disclosure of sensitive information"
+      ],
+      "missing_controls": [
+        "Clear definition of what is excluded from Confidential Information",
+        "Specification of the parties' obligations regarding Confidential Information",
+        "Time limits for confidentiality obligations"
+      ],
+      "regulation_violations": [
+        "GDPR: Article 5(1)(c) (data minimization principle)",
+        "General contract law: potential for ambiguity and disputes"
+      ],
+      "explanation": "The clause's broad definition of Confidential Information may lead to unintended consequences, such as overly restrictive obligations or disputes over what constitutes non-public information. Additional specificity and controls are necessary to mitigate these risks.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause's broad definition of Confidential Information may lead to unintended consequences, such as overly restrictive obligations or disputes over what constitutes non-public information. Additional specificity and controls are necessary to mitigate these risks."
+    }
+  },
+  {
+    "clause_id": "2.1",
+    "clause_heading": "GRANT OF LICENSE",
+    "clause_text": "2.1 Provider grants Customer a non-exclusive, non-transferable right to access and use the Services.",
+    "clause_type": "IP",
+    "rationale": "This clause is categorized as IP because it grants a license to use the Provider's intellectual property, specifically the Services.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [
+        "Limited transferability may restrict Customer's ability to change service providers",
+        "Non-exclusivity may lead to Provider offering similar services to competitors"
+      ],
+      "missing_controls": [
+        "No explicit mention of data protection or confidentiality",
+        "No clear guidelines on intellectual property ownership"
+      ],
+      "regulation_violations": [],
+      "explanation": "This clause grants a non-exclusive, non-transferable license to access and use the Services, which is a standard provision in many service agreements. The risk is relatively low, but Customers should be aware of the limitations on transferability and potential competition from other service providers.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause grants a non-exclusive, non-transferable license to access and use the Services, which is a standard provision in many service agreements. The risk is relatively low, but Customers should be aware of the limitations on transferability and potential competition from other service providers."
+    }
+  },
+  {
+    "clause_id": "2.2",
+    "clause_heading": "GRANT OF LICENSE",
+    "clause_text": "2.2 Customer shall not modify, reverse-engineer, or create derivative works of the Services.",
+    "clause_type": "IP",
+    "rationale": "This clause is categorized as IP because it restricts the Customer's ability to modify or create derivative works of the Provider's intellectual property.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "Restrictive language may be subject to challenge under copyright law",
+        "Potential for dispute over what constitutes a 'derivative work'"
+      ],
+      "missing_controls": [
+        "No explicit exception for activities permitted by law",
+        "No provision for customer feedback or improvement suggestions"
+      ],
+      "regulation_violations": [],
+      "explanation": "This clause is a standard intellectual property protection provision, limiting customer modification of the services. While it may be subject to challenge, it is a common and generally enforceable term.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause is a standard intellectual property protection provision, limiting customer modification of the services. While it may be subject to challenge, it is a common and generally enforceable term."
+    }
+  },
+  {
+    "clause_id": "3.1",
+    "clause_heading": "SERVICE AVAILABILITY",
+    "clause_text": "3.1 Provider shall use commercially reasonable efforts to ensure 99% uptime.",
+    "clause_type": "SLA",
+    "rationale": "This clause is categorized as SLA because it sets a specific service level expectation for the Provider's performance.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "unclear definition of 'commercially reasonable efforts'",
+        "lack of specified downtime notification procedures",
+        "no clear consequences for failure to meet uptime target"
+      ],
+      "missing_controls": [
+        "detailed uptime measurement methodology",
+        "remediation plan for downtime exceeding 1%",
+        "service level agreement (SLA) with specific metrics"
+      ],
+      "regulation_violations": [],
+      "explanation": "The clause sets a reasonable uptime target, but lacks specificity and teeth, making it a relatively low-risk provision from a regulatory and legal perspective.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause sets a reasonable uptime target, but lacks specificity and teeth, making it a relatively low-risk provision from a regulatory and legal perspective."
+    }
+  },
+  {
+    "clause_id": "3.2",
+    "clause_heading": "SERVICE AVAILABILITY",
+    "clause_text": "3.2 Scheduled maintenance will be notified 24 hours in advance.",
+    "clause_type": "SLA",
+    "rationale": "This clause is categorized as SLA because it sets a specific expectation for notification of scheduled maintenance.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [],
+      "missing_controls": [
+        "specific details on maintenance window",
+        "notification method"
+      ],
+      "regulation_violations": [],
+      "explanation": "The clause provides advance notice for scheduled maintenance, which is a standard practice and does not introduce significant regulatory or legal risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause provides advance notice for scheduled maintenance, which is a standard practice and does not introduce significant regulatory or legal risk."
+    }
+  },
+  {
+    "clause_id": "4.1",
+    "clause_heading": "CUSTOMER RESPONSIBILITIES",
+    "clause_text": "4.1 Customer is responsible for login confidentiality.",
+    "clause_type": "Security",
+    "rationale": "This clause is categorized as Other because it is more accurately described as a security responsibility, but since Security is not an option, it is classified as Other, however a more precise classification would be Security.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "Customer responsibility for login security may not be explicitly defined",
+        "Lack of clarity on consequences of login confidentiality breach"
+      ],
+      "missing_controls": [
+        "Specific requirements for password management",
+        "Multi-factor authentication measures"
+      ],
+      "regulation_violations": [],
+      "explanation": "This clause assigns responsibility to the customer for login confidentiality, which is a common and reasonable expectation. However, it lacks specific details on security requirements and breach consequences, potentially leading to ambiguity.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause assigns responsibility to the customer for login confidentiality, which is a common and reasonable expectation. However, it lacks specific details on security requirements and breach consequences, potentially leading to ambiguity."
+    }
+  },
+  {
+    "clause_id": "4.2",
+    "clause_heading": "CUSTOMER RESPONSIBILITIES",
+    "clause_text": "4.2 Customer shall not upload harmful or unlawful data.",
+    "clause_type": "Other",
+    "rationale": "This clause is categorized as Other because it imposes a responsibility on the Customer to comply with laws and regulations, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "Ambiguity in definition of 'harmful' and 'unlawful' data",
+        "Lack of specific consequences for non-compliance"
+      ],
+      "missing_controls": [
+        "Definition of 'harmful' and 'unlawful' data",
+        "Mechanisms for monitoring and enforcing compliance"
+      ],
+      "regulation_violations": [
+        "GDPR (Article 5: Principles relating to processing of personal data)",
+        "HIPAA (45 CFR 164.530(c): Sanctions for violation)"
+      ],
+      "explanation": "The clause attempts to restrict the customer from uploading harmful or unlawful data, but lacks specificity and enforcement mechanisms, potentially leading to regulatory non-compliance under GDPR and HIPAA.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause attempts to restrict the customer from uploading harmful or unlawful data, but lacks specificity and enforcement mechanisms, potentially leading to regulatory non-compliance under GDPR and HIPAA."
+    }
+  },
+  {
+    "clause_id": "5.1",
+    "clause_heading": "DATA PROTECTION & PRIVACY",
+    "clause_text": "5.1 Provider will process User Data per applicable laws.",
+    "clause_type": "Data Protection",
+    "rationale": "This clause is categorized as Data Protection because it sets out the Provider's obligations to comply with applicable data protection laws.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Lack of specificity regarding applicable laws",
+        "Unclear definition of User Data",
+        "No explicit mention of data protection standards or regulations"
+      ],
+      "missing_controls": [
+        "Definition of User Data",
+        "Specific reference to relevant data protection regulations (e.g., GDPR, HIPAA)",
+        "Details on data processing procedures and security measures"
+      ],
+      "regulation_violations": [
+        "Potential non-compliance with Article 5 of the GDPR (principles relating to processing of personal data)",
+        "Possible inconsistency with HIPAA requirements for protected health information"
+      ],
+      "explanation": "The clause lacks specificity and clarity regarding the applicable laws and data protection standards, which may lead to uncertainty and potential non-compliance with relevant regulations.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause lacks specificity and clarity regarding the applicable laws and data protection standards, which may lead to uncertainty and potential non-compliance with relevant regulations."
+    }
+  },
+  {
+    "clause_id": "5.2",
+    "clause_heading": "DATA PROTECTION & PRIVACY",
+    "clause_text": "5.2 Provider may store data on servers outside India.",
+    "clause_type": "Data Protection",
+    "rationale": "This clause is categorized as Data Protection because it sets out the Provider's ability to transfer data outside of India, which is a data protection consideration.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "high",
+      "risk_score": 80,
+      "risk_factors": [
+        "Data sovereignty concerns",
+        "Potential breach of data localization requirements",
+        "Increased risk of data breaches due to cross-border transfers"
+      ],
+      "missing_controls": [
+        "Lack of specification on server locations",
+        "No mention of data encryption or security measures",
+        "No clear guidelines on data subject access requests"
+      ],
+      "regulation_violations": [
+        "GDPR Article 44 (General principle for transfers)",
+        "GDPR Article 46 (Transfers subject to appropriate safeguards)",
+        "India's Personal Data Protection Bill (data localization requirements)"
+      ],
+      "explanation": "The clause poses significant risks due to the potential transfer of data outside India, which may violate data localization requirements and compromise data security, triggering concerns under GDPR and Indian data protection regulations.",
+      "_llm_used": "groq",
+      "severity": "high",
+      "risk_reason": "The clause poses significant risks due to the potential transfer of data outside India, which may violate data localization requirements and compromise data security, triggering concerns under GDPR and Indian data protection regulations."
+    }
+  },
+  {
+    "clause_id": "5.3",
+    "clause_heading": "DATA PROTECTION & PRIVACY",
+    "clause_text": "5.3 Customer must obtain necessary consents from end-users.",
+    "clause_type": "Data Protection",
+    "rationale": "This clause is categorized as Data Protection because it imposes an obligation on the Customer to obtain necessary consents from end-users, which is a fundamental aspect of data protection.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Ambiguity regarding the type of consents required",
+        "Unclear definition of 'necessary consents'",
+        "Potential for non-compliance with data protection regulations"
+      ],
+      "missing_controls": [
+        "Specific guidelines for obtaining consents",
+        "Mechanisms for verifying consent",
+        "Procedures for handling consent withdrawal"
+      ],
+      "regulation_violations": [
+        "GDPR (Article 7: Conditions for consent)",
+        "HIPAA (45 CFR 164.508: Patient consent)"
+      ],
+      "explanation": "The clause implies that the customer is responsible for obtaining necessary consents from end-users, but lacks specificity and clarity, potentially leading to non-compliance with data protection regulations such as GDPR and HIPAA.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause implies that the customer is responsible for obtaining necessary consents from end-users, but lacks specificity and clarity, potentially leading to non-compliance with data protection regulations such as GDPR and HIPAA."
+    }
+  },
+  {
+    "clause_id": "6.1",
+    "clause_heading": "CONFIDENTIALITY",
+    "clause_text": "6.1 Each party shall maintain confidentiality.",
+    "clause_type": "Confidentiality",
+    "rationale": "This clause is categorized as Confidentiality because it imposes a mutual obligation on the parties to maintain confidentiality.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 40,
+      "risk_factors": [
+        "Lack of definition for confidential information",
+        "No specified duration for confidentiality",
+        "No exceptions for disclosure listed",
+        "Unclear consequences for breach of confidentiality"
+      ],
+      "missing_controls": [
+        "No procedure for handling confidential information",
+        "No requirement for non-disclosure agreements with employees or subcontractors"
+      ],
+      "regulation_violations": [
+        "GDPR Article 5(1)(f) (integrity and confidentiality)",
+        "SOC2 Trust Services Criteria (TSC) 1.1 (information security policies)"
+      ],
+      "explanation": "The clause lacks specificity regarding the scope, duration, and consequences of confidentiality, potentially leading to disputes or non-compliance with data protection regulations.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause lacks specificity regarding the scope, duration, and consequences of confidentiality, potentially leading to disputes or non-compliance with data protection regulations."
+    }
+  },
+  {
+    "clause_id": "6.2",
+    "clause_heading": "CONFIDENTIALITY",
+    "clause_text": "6.2 Exceptions apply where disclosure is required by law.",
+    "clause_type": "Confidentiality",
+    "rationale": "This clause is categorized as Confidentiality because it sets out an exception to the confidentiality obligation, which is a fundamental aspect of confidentiality agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "Potential for involuntary disclosure of confidential information",
+        "Unclear definition of 'required by law'"
+      ],
+      "missing_controls": [
+        "Lack of notice requirement to the other party prior to disclosure",
+        "No specification of the procedures for handling compelled disclosure"
+      ],
+      "regulation_violations": [
+        "Potential inconsistency with GDPR Article 29 Working Party guidelines on confidentiality agreements",
+        "Possible implications under HIPAA for protected health information"
+      ],
+      "explanation": "This clause presents a relatively low risk as it provides a standard exception for disclosures required by law, but lacks specificity and controls to mitigate potential risks and ensure compliance with relevant regulations.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause presents a relatively low risk as it provides a standard exception for disclosures required by law, but lacks specificity and controls to mitigate potential risks and ensure compliance with relevant regulations."
+    }
+  },
+  {
+    "clause_id": "7.1",
+    "clause_heading": "FEES & PAYMENT",
+    "clause_text": "7.1 Customer shall pay subscription fees as scheduled.",
+    "clause_type": "Payment",
+    "rationale": "This clause is categorized as Payment because it sets out the Customer's obligation to pay subscription fees.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [],
+      "missing_controls": [],
+      "regulation_violations": [],
+      "explanation": "This clause is a standard payment term and does not introduce significant regulatory or legal risk, as it simply states the customer's obligation to pay subscription fees as scheduled.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause is a standard payment term and does not introduce significant regulatory or legal risk, as it simply states the customer's obligation to pay subscription fees as scheduled."
+    }
+  },
+  {
+    "clause_id": "7.2",
+    "clause_heading": "FEES & PAYMENT",
+    "clause_text": "7.2 Delayed payments beyond 15 days attract a 2% monthly penalty.",
+    "clause_type": "Payment",
+    "rationale": "This clause is categorized as Payment because it sets out the consequences of delayed payment, which is a fundamental aspect of payment terms.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "potential for dispute over payment timing",
+        "penalty rate may be considered usurious in certain jurisdictions"
+      ],
+      "missing_controls": [
+        "no clear definition of when payment is considered late",
+        "no provision for waiver or reduction of penalty in cases of good faith dispute"
+      ],
+      "regulation_violations": [],
+      "explanation": "This clause imposes a standard penalty for late payment, which is a common practice. However, the lack of clear definition and potential for usurious penalty rates may pose some risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause imposes a standard penalty for late payment, which is a common practice. However, the lack of clear definition and potential for usurious penalty rates may pose some risk."
+    }
+  },
+  {
+    "clause_id": "8.1",
+    "clause_heading": "INTELLECTUAL PROPERTY",
+    "clause_text": "8.1 All rights in the Services remain with the Provider.",
+    "clause_type": "IP",
+    "rationale": "This clause is categorized as IP because it sets out the Provider's ownership of the intellectual property rights in the Services.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [
+        "Potential ambiguity regarding ownership of derivative works",
+        "Lack of explicit license grant to the customer"
+      ],
+      "missing_controls": [
+        "Definition of 'Services' and scope of ownership",
+        "Provisions for customer use of the Services"
+      ],
+      "regulation_violations": [],
+      "explanation": "This clause asserts the Provider's ownership of the Services, which is a standard provision. However, it lacks clarity on the scope of ownership and customer usage rights, potentially leading to disputes. No direct regulatory violations are implicated.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause asserts the Provider's ownership of the Services, which is a standard provision. However, it lacks clarity on the scope of ownership and customer usage rights, potentially leading to disputes. No direct regulatory violations are implicated."
+    }
+  },
+  {
+    "clause_id": "8.2",
+    "clause_heading": "INTELLECTUAL PROPERTY",
+    "clause_text": "8.2 Customer receives no ownership rights.",
+    "clause_type": "IP",
+    "rationale": "This clause is categorized as IP because it sets out the Customer's lack of ownership rights in the Services, which is a fundamental aspect of intellectual property agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [
+        "Ambiguity regarding intellectual property rights",
+        "Potential for customer misunderstanding"
+      ],
+      "missing_controls": [
+        "Explicit definition of intellectual property rights",
+        "Clarification on licensed rights"
+      ],
+      "regulation_violations": [],
+      "explanation": "The clause clearly states that the customer receives no ownership rights, which is a common and reasonable provision. However, it lacks explicit definition of intellectual property rights and clarification on licensed rights, which may lead to ambiguity and customer misunderstanding.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause clearly states that the customer receives no ownership rights, which is a common and reasonable provision. However, it lacks explicit definition of intellectual property rights and clarification on licensed rights, which may lead to ambiguity and customer misunderstanding."
+    }
+  },
+  {
+    "clause_id": "9.1",
+    "clause_heading": "DATA SECURITY",
+    "clause_text": "9.1 Provider will implement reasonable safeguards.",
+    "clause_type": "Data Protection",
+    "rationale": "This clause is categorized as Data Protection because it sets out the Provider's obligation to implement reasonable safeguards to protect data.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Lack of specific safeguarding measures",
+        "Unclear definition of 'reasonable safeguards'",
+        "Potential for inconsistent implementation"
+      ],
+      "missing_controls": [
+        "Specific security standards or frameworks",
+        "Regular security audit requirements",
+        "Incident response plan"
+      ],
+      "regulation_violations": [
+        "GDPR Article 32 (Security of processing)",
+        "HIPAA Section 164.306 (Security standards)",
+        "SOC2 Section 5.1 (Security controls)"
+      ],
+      "explanation": "The clause requires the Provider to implement 'reasonable safeguards', but lacks specificity and clarity, potentially leading to inconsistent implementation and increased risk of non-compliance with relevant regulations such as GDPR, HIPAA, and SOC2.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause requires the Provider to implement 'reasonable safeguards', but lacks specificity and clarity, potentially leading to inconsistent implementation and increased risk of non-compliance with relevant regulations such as GDPR, HIPAA, and SOC2."
+    }
+  },
+  {
+    "clause_id": "9.2",
+    "clause_heading": "DATA SECURITY",
+    "clause_text": "9.2 Provider is not liable for breaches caused by Customer negligence.",
+    "clause_type": "Liability",
+    "rationale": "This clause is categorized as Liability because it sets out the Provider's limitation of liability for breaches caused by Customer negligence.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "unclear definition of negligence",
+        "potential imbalance in liability allocation",
+        "lack of clarity on breach notification and response"
+      ],
+      "missing_controls": [
+        "no provision for Customer notification in case of breach",
+        "no clear process for breach response and mitigation",
+        "no definition of standards for reasonable care"
+      ],
+      "regulation_violations": [
+        "potential non-compliance with GDPR Article 82 (right to compensation)",
+        "possible inconsistency with HIPAA Section 164.530 (policies and procedures)"
+      ],
+      "explanation": "This clause may shift liability excessively to the Customer, potentially violating regulations like GDPR and HIPAA, which emphasize the importance of data protection and breach notification. The lack of clarity on negligence and breach response exacerbates the risk.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "This clause may shift liability excessively to the Customer, potentially violating regulations like GDPR and HIPAA, which emphasize the importance of data protection and breach notification. The lack of clarity on negligence and breach response exacerbates the risk."
+    }
+  },
+  {
+    "clause_id": "10.1",
+    "clause_heading": "LIMITATION OF LIABILITY",
+    "clause_text": "10.1 Liability shall not exceed fees paid in the previous 3 months.",
+    "clause_type": "Liability",
+    "rationale": "This clause is categorized as Liability because it sets out a limitation on the Provider's liability, which is a fundamental aspect of liability agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Liability cap may not be sufficient to cover potential damages",
+        "Fees paid in previous 3 months may not reflect actual damages incurred",
+        "May not comply with regulatory requirements for liability limitations"
+      ],
+      "missing_controls": [
+        "No provision for exceptions or carve-outs for gross negligence or willful misconduct",
+        "No clear definition of 'fees paid' and how it relates to the scope of work"
+      ],
+      "regulation_violations": [
+        "Potential non-compliance with GDPR Article 82 (right to compensation)",
+        "Potential non-compliance with HIPAA Section 164.530(e) (limits on liability)"
+      ],
+      "explanation": "The liability cap may be considered reasonable, but it may not be sufficient to cover potential damages, and regulatory requirements may impose stricter liability standards.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The liability cap may be considered reasonable, but it may not be sufficient to cover potential damages, and regulatory requirements may impose stricter liability standards."
+    }
+  },
+  {
+    "clause_id": "10.2",
+    "clause_heading": "LIMITATION OF LIABILITY",
+    "clause_text": "10.2 No indirect or consequential damages apply.",
+    "clause_type": "Liability",
+    "rationale": "This clause is categorized as Liability because it sets out an exclusion of indirect or consequential damages, which is a fundamental aspect of liability agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Limitation of liability for indirect damages",
+        "Potential exclusion of consequential damages",
+        "Unclear scope of damages excluded"
+      ],
+      "missing_controls": [
+        "Definition of indirect and consequential damages",
+        "Carve-outs for gross negligence or willful misconduct"
+      ],
+      "regulation_violations": [
+        "Potential inconsistency with GDPR Article 82 (right to compensation)",
+        "Possible conflict with SOC2 requirements for liability and indemnity"
+      ],
+      "explanation": "This clause may limit the liability of one or both parties for indirect or consequential damages, which could be problematic under certain regulations and laws, such as GDPR. The lack of clear definitions and carve-outs increases the risk.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "This clause may limit the liability of one or both parties for indirect or consequential damages, which could be problematic under certain regulations and laws, such as GDPR. The lack of clear definitions and carve-outs increases the risk."
+    }
+  },
+  {
+    "clause_id": "11.1",
+    "clause_heading": "TERMINATION",
+    "clause_text": "11.1 Either party may terminate with 30 days notice.",
+    "clause_type": "Termination",
+    "rationale": "This clause is categorized as Termination because it sets out the procedure for terminating the agreement, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 20,
+      "risk_factors": [
+        "Unclear termination consequences",
+        "Potential disruption of services"
+      ],
+      "missing_controls": [
+        "Lack of termination fee or penalty",
+        "No provision for transition or wind-down period"
+      ],
+      "regulation_violations": [],
+      "explanation": "The clause provides a standard termination notice period, which is a common practice in contracts. However, it lacks specificity on the consequences of termination and does not provide adequate controls to mitigate potential risks.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause provides a standard termination notice period, which is a common practice in contracts. However, it lacks specificity on the consequences of termination and does not provide adequate controls to mitigate potential risks."
+    }
+  },
+  {
+    "clause_id": "11.2",
+    "clause_heading": "TERMINATION",
+    "clause_text": "11.2 Provider may suspend access for breach.",
+    "clause_type": "Termination",
+    "rationale": "This clause is categorized as Termination because it sets out the Provider's right to suspend access in the event of a breach, which is a fundamental aspect of termination agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 60,
+      "risk_factors": [
+        "Unclear definition of breach",
+        "Potential for unilateral action by Provider",
+        "Lack of notice or cure period for breach",
+        "Possible disruption to business operations"
+      ],
+      "missing_controls": [
+        "Specific criteria for determining breach",
+        "Obligation to provide notice and opportunity to cure",
+        "Provisions for alternative dispute resolution"
+      ],
+      "regulation_violations": [
+        "Potential inconsistency with GDPR Article 28 (Processor obligations)",
+        "Possible non-compliance with SOC2 principles (availability and processing integrity)"
+      ],
+      "explanation": "This clause poses a medium risk due to its broad and unilateral nature, which may lead to disputes and potential regulatory non-compliance, particularly regarding data protection and processor obligations.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "This clause poses a medium risk due to its broad and unilateral nature, which may lead to disputes and potential regulatory non-compliance, particularly regarding data protection and processor obligations."
+    }
+  },
+  {
+    "clause_id": "12",
+    "clause_heading": "GOVERNING LAW",
+    "clause_text": "12. India.",
+    "clause_type": "Governing Law",
+    "rationale": "This clause is categorized as Governing Law because it sets out the law that governs the agreement, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 5,
+      "risk_factors": [],
+      "missing_controls": [],
+      "regulation_violations": [],
+      "explanation": "The clause only mentions a country name without any contractual terms or obligations, thus it does not pose any significant legal or regulatory risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "The clause only mentions a country name without any contractual terms or obligations, thus it does not pose any significant legal or regulatory risk."
+    }
+  },
+  {
+    "clause_id": "13",
+    "clause_heading": "DISPUTE RESOLUTION",
+    "clause_text": "13. Arbitration in Bengaluru.",
+    "clause_type": "Dispute Resolution",
+    "rationale": "This clause is categorized as Dispute Resolution because it sets out the procedure for resolving disputes, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "medium",
+      "risk_score": 40,
+      "risk_factors": [
+        "Unclear scope of arbitration",
+        "Potential jurisdictional issues",
+        "Lack of detail on arbitration process"
+      ],
+      "missing_controls": [
+        "No mention of governing law",
+        "No mention of arbitration rules",
+        "No mention of appeal process"
+      ],
+      "regulation_violations": [],
+      "explanation": "The clause specifies arbitration in Bengaluru, but lacks detail on the arbitration process, governing law, and appeal process, which may lead to uncertainty and potential disputes.",
+      "_llm_used": "groq",
+      "severity": "medium",
+      "risk_reason": "The clause specifies arbitration in Bengaluru, but lacks detail on the arbitration process, governing law, and appeal process, which may lead to uncertainty and potential disputes."
+    }
+  },
+  {
+    "clause_id": "14.1",
+    "clause_heading": "MISCELLANEOUS",
+    "clause_text": "14.1 Amendments must be written.",
+    "clause_type": "Other",
+    "rationale": "This clause is categorized as Other because it sets out a procedural requirement for amending the agreement, which is a fundamental aspect of contract interpretation.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [],
+      "missing_controls": [],
+      "regulation_violations": [],
+      "explanation": "This clause requires amendments to be in writing, which is a standard and reasonable provision to prevent disputes and ensure clarity, posing minimal legal and regulatory risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause requires amendments to be in writing, which is a standard and reasonable provision to prevent disputes and ensure clarity, posing minimal legal and regulatory risk."
+    }
+  },
+  {
+    "clause_id": "14.2",
+    "clause_heading": "MISCELLANEOUS",
+    "clause_text": "14.2 Assignment requires consent.",
+    "clause_type": "Assignment",
+    "rationale": "This clause is categorized as Assignment because it sets out the requirement for consent to assign the agreement, which is a fundamental aspect of assignment agreements.",
+    "_llm_used": "groq",
+    "risk": {
+      "risk_level": "low",
+      "risk_score": 10,
+      "risk_factors": [],
+      "missing_controls": [],
+      "regulation_violations": [],
+      "explanation": "This clause requires consent for assignment, which is a standard and reasonable provision that mitigates the risk of unwanted transfers of rights or obligations, thus posing minimal legal and regulatory risk.",
+      "_llm_used": "groq",
+      "severity": "low",
+      "risk_reason": "This clause requires consent for assignment, which is a standard and reasonable provision that mitigates the risk of unwanted transfers of rights or obligations, thus posing minimal legal and regulatory risk."
+    }
+  }
+]
