@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "compliance_pipeline": "./src/pipeline/workflow.py:graph"
+  },
+  "env": ".env"
+}

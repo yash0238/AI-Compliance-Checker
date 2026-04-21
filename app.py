@@ -3,12 +3,21 @@
 import streamlit as st
 import json
 import os
+import warnings
+warnings.filterwarnings("ignore", module="transformers")
+
+# Force local HuggingFace cache immediately
+os.environ["HF_HOME"] = os.path.join(os.getcwd(), "data", "hf_cache")
+os.environ["TRANSFORMERS_CACHE"] = os.path.join(os.getcwd(), "data", "hf_cache")
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+
 from datetime import datetime
 from dotenv import load_dotenv
 # ----------------------------
 # IMPORT YOUR PIPELINE
 # ----------------------------
 from run import run_pipeline
+from src.utils.visualizer import get_mermaid_graph, get_interactive_mermaid_html
 
 # Load environment variables from .env
 load_dotenv()
@@ -162,6 +171,7 @@ tabs = st.tabs([
     "📑 Clause & Risk Analysis",
     "🛠️ Suggestions & Amendments",
     "📊 Compliance Report",
+    "🔍 Workflow Viewer",
     "🔔 Alerts & Downloads"
 ])
 
@@ -202,8 +212,13 @@ with tabs[0]:
         if run_clicked and not st.session_state.pipeline_done:
             try:
                 with st.spinner("Running compliance pipeline…"):
+                    # Use a unique thread ID for this contract
+                    thread_id = f"st_{uploaded_pdf.name.split('.')[0]}_{datetime.now().strftime('%H%M%S')}"
+                    st.session_state.current_thread = thread_id
+                    
                     run_pipeline(
                         pdf_path,
+                        thread_id=thread_id,
                         progress_callback=progress_callback
                     )
 
@@ -211,7 +226,7 @@ with tabs[0]:
                 status_text.success("Pipeline completed successfully")
 
             except Exception as e:
-                st.error("❌ Pipeline failed. Check logs.")
+                st.error(f"❌ Pipeline failed: {e}")
 
 
 
@@ -413,9 +428,29 @@ with tabs[3]:
 
 
 # ==================================================
-# TAB 5 — ALERTS & DOWNLOADS
+# TAB 5 — WORKFLOW VIEWER (INTERACTIVE GRAPH)
 # ==================================================
 with tabs[4]:
+    st.header("Graph Workflow Visualization")
+    st.info("This is the interactive LangGraph orchestration driving your compliance pipeline.")
+    
+    with st.spinner("Generating interactive graph..."):
+        try:
+            mermaid_code = get_mermaid_graph()
+            html_content = get_interactive_mermaid_html(mermaid_code)
+            
+            # Render the HTML component (st.components.v1.html deprecated → use st.html)
+            st.html(html_content)
+            
+            with st.expander("Show Mermaid Source Code"):
+                st.code(mermaid_code, language="mermaid")
+        except Exception as e:
+            st.error(f"Could not render graph: {e}")
+
+# ==================================================
+# TAB 6 — ALERTS & DOWNLOADS
+# ==================================================
+with tabs[5]:
     st.header("Notifications & Output Files")
 
     if not st.session_state.pipeline_done:

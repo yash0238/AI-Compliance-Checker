@@ -3,79 +3,113 @@
 import json
 from dotenv import load_dotenv
 
-from src.llm.llm_router import chat_completion_json
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+
+from src.llm.models import get_structured_llm
+from src.llm.schemas import RiskAssessment
+
+# Optional import for RAG
+try:
+    from src.rag.vector_store import VectorStoreManager
+    vector_manager = VectorStoreManager()
+    RAG_ENABLED = True
+except Exception as e:
+    print(f"RAG not available or failed to load: {e}")
+    vector_manager = None
+    RAG_ENABLED = False
 
 load_dotenv()
 
-# =====================================================
-# PROMPTS (UNCHANGED)
-# =====================================================
-SYSTEM_PROMPT = """
-You are a Senior Regulatory Compliance Officer specializing in contract law.
-Your task is to evaluate LEGAL RISK for each contract clause.
-
-You MUST output ONLY valid JSON in the following structure:
-
-{
-  "risk_level": "low" | "medium" | "high",
-  "risk_score": number (0-100),
-  "risk_factors": [ list of key concerns ],
-  "missing_controls": [ list of missing protections ],
-  "regulation_violations": [ list of violated or implicated regulations ],
-  "explanation": "short summary written for compliance analysts"
-}
+SYSTEM_PROMPT = """You are a Senior Regulatory Compliance Officer specializing in Indian Constitutional and Contract Law.
+Your task is to evaluate LEGAL RISK for each contract clause using the provided INDIAN LAW CONTEXT.
 
 Rules:
-- Base risk on the meaning of the clause, not keywords.
-- Evaluate confidentiality, liability, indemnity, data protection, IP, and regulatory exposure.
-- Consider GDPR, HIPAA, SOC2, ISO27001, and general contract law.
-- Be strict. If uncertain, classify as medium risk.
-"""
+- Prioritize the provided context over general training data.
+- Evaluate clauses against the Constitution of India (Fundamental Rights, etc.).
+- Be strict. If a clause restricts a fundamental right (like freedom of movement or equality), mark it as high risk.
 
-USER_PROMPT_TEMPLATE = """
-Evaluate the legal and regulatory risk of the following clause:
+CRITICAL OUTPUT FORMAT RULES (you MUST follow these exactly):
+- `risk_factors`, `missing_controls`, and `regulation_violations` MUST always be JSON arrays (lists).
+- If there are no items for a list field, return an EMPTY ARRAY: [] — NEVER return an empty string "" or null.
+- Example of correct empty fields: "risk_factors": [], "missing_controls": [], "regulation_violations": []
+- Example of correct non-empty fields: "risk_factors": ["Potential bias", "Unequal treatment"]"""
+
+USER_PROMPT_TEMPLATE = """Evaluate the legal and regulatory risk of the following clause:
+
+<CONTEXT_FROM_INDIAN_LAW>
+{legal_context}
+</CONTEXT_FROM_INDIAN_LAW>
 
 <CLAUSE_TEXT>
 {clause}
-</CLAUSE_TEXT>
+</CLAUSE_TEXT>"""
 
-Return ONLY the JSON object described in the system prompt.
-"""
+def get_context(clause_text: str) -> str:
+    """Retrieves relevant legal context using RAG."""
+    if RAG_ENABLED and vector_manager is not None:
+        try:
+            results = vector_manager.search_similar(clause_text, k=2)
+            if results:
+                return "\n\n---\n\n".join([r.page_content for r in results])
+        except Exception as e:
+            print(f"RAG retrieval error: {e}")
+    return "No specific context retrieved."
 
-# =====================================================
-# CORE LLM CALL (REFactored)
-# =====================================================
 def assess_clause_with_llm(clause_text: str):
-    prompt = USER_PROMPT_TEMPLATE.format(clause=clause_text)
+    """
+    Evaluates a single clause using LangChain LCEL with a RAG step before LLM prediction.
+    """
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", SYSTEM_PROMPT),
+        ("user", USER_PROMPT_TEMPLATE)
+    ])
 
-    risk = chat_completion_json(
-        system_prompt=SYSTEM_PROMPT,
-        user_prompt=prompt,
-        temperature=0.0
+    llm_with_structure = get_structured_llm(RiskAssessment, temperature=0.0)
+
+    # LCEL Pipeline:
+    # 1. Take 'clause' as input
+    # 2. Assign 'legal_context' dynamically using the get_context function
+    # 3. Format the prompt
+    # 4. Invoke LLM and parse to RiskAssessment structure
+    chain = (
+        {"clause": RunnablePassthrough(), "legal_context": lambda x: get_context(x)}
+        | prompt
+        | llm_with_structure
     )
 
-    # Standardize on "severity" for downstream pipeline
-    if isinstance(risk, dict):
-        risk_level = risk.get("risk_level")
+    response: RiskAssessment = chain.invoke(clause_text)
 
-        if risk_level in ["low", "medium", "high"]:
-            risk["severity"] = risk_level
-        else:
-            risk["severity"] = "medium"  # safe fallback
+    # Standardize dictionary for downstream components
+    risk = response.model_dump()
 
-        # 🔴 ADD THIS LINE (CRITICAL)
-        risk["risk_reason"] = risk.get("explanation", "").strip()
+    # --- Guard: LLM sometimes returns "" instead of [] for array fields ---
+    # Coerce any string value into a proper list to prevent schema errors
+    _array_fields = ["risk_factors", "missing_controls", "regulation_violations"]
+    for field in _array_fields:
+        val = risk.get(field, [])
+        if isinstance(val, str):
+            # Split on comma if non-empty, else use empty list
+            risk[field] = [v.strip() for v in val.split(",") if v.strip()] if val.strip() else []
+    # --------------------------------------------------------------------------
+
+    # Store context used for traceability
+    risk["retrieved_legal_context"] = get_context(clause_text).split("\n\n---\n\n")
+
+    # Add severity mapping
+    risk_level = risk.get("risk_level", "medium").lower()
+    if risk_level in ["low", "medium", "high"]:
+        risk["severity"] = risk_level
+    else:
+        risk["severity"] = "medium"
+
+    risk["risk_reason"] = risk.get("explanation", "").strip()
 
     return risk
 
-
-# =====================================================
-# BATCH RISK ASSESSMENT (UNCHANGED API)
-# =====================================================
 def assess_clauses(clauses):
     """
-    clauses → list of clause dicts from clause_extractor
-    Attaches LLM risk output to each clause
+    Evaluates a batch of clauses.
     """
     assessed = []
 
@@ -84,32 +118,9 @@ def assess_clauses(clauses):
         clause_id = c.get("clause_id")
 
         print(f"\nEvaluating risk for clause: {clause_id} ...")
-
         risk = assess_clause_with_llm(text)
 
-        # Attach risk + audit metadata
         c["risk"] = risk
         assessed.append(c)
 
     return assessed
-
-
-# =====================================================
-# STANDALONE TEST (OPTIONAL)
-# =====================================================
-if __name__ == "__main__":
-    INPUT_FILE = "extracted_clauses.json"
-    OUTPUT_FILE = "clauses_with_llm_risk.json"
-
-    print(f"\nLoading clauses from: {INPUT_FILE}")
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        clauses_list = json.load(f)
-
-    print("\nRunning LLM-based risk assessment...")
-    assessed = assess_clauses(clauses_list)
-
-    print(f"\nSaving risk-evaluated clauses to: {OUTPUT_FILE}")
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(assessed, f, indent=2, ensure_ascii=False)
-
-    print("\nRisk analysis saved successfully.")

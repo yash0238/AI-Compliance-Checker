@@ -28,4 +28,10 @@ orjson
 
 feedparser
 
+# LangChain and LangGraph
+langchain
+langgraph
+langchain-groq
+langchain-google-genai
+pydantic
 

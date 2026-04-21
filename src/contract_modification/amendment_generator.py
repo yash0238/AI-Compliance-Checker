@@ -1,71 +1,69 @@
 # src/contract_modification/amendment_generator.py
 
 from dotenv import load_dotenv
-from src.llm.llm_router import chat_completion
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+from src.llm.models import get_primary_llm
 
 load_dotenv()
 
-# =====================================================
-# PROMPTS
-# =====================================================
-SYSTEM_PROMPT_AMEND = """
-You are a senior contract and compliance lawyer.
+SYSTEM_PROMPT_AMEND = """You are a senior contract and compliance lawyer.
 
 Rewrite ONLY the clause provided to resolve the identified HIGH RISK.
 Do NOT add new obligations beyond what is necessary to fix the risk.
 Do NOT introduce new clauses, headings, or definitions.
 Preserve the original structure, numbering, and legal tone.
 
-Return ONLY the rewritten clause text.
-"""
+Return ONLY the rewritten clause text."""
 
-
-
-SYSTEM_PROMPT_NEW = """
-You are a senior compliance lawyer.
-Draft a legally sound contract clause.
-"""
-
-# =====================================================
-# AMEND EXISTING CLAUSE (REFactored)
-# =====================================================
-def generate_amendment(original_clause, reason, regulation=None):
-    user_prompt = f"""
-Original Clause:
+USER_PROMPT_AMEND = """Original Clause:
 {original_clause}
 
 Issue:
 {reason}
 
 Regulatory Context:
-{regulation if regulation else "General Compliance"}
-"""
-
-    result = chat_completion(
-        system_prompt=SYSTEM_PROMPT_AMEND,
-        user_prompt=user_prompt,
-        temperature=0.0
-    )
-
-    # Plain text expected (do NOT force JSON here)
-    amended_clause = result["content"].strip()
-
-    return amended_clause
+{regulation}"""
 
 
-# =====================================================
-# GENERATE NEW COMPLIANCE CLAUSE
-# =====================================================
+SYSTEM_PROMPT_NEW = """You are a senior compliance lawyer.
+Draft a legally sound contract clause."""
+
+USER_PROMPT_NEW = """Draft a '{clause_name}' clause required under {regulation}.
+The clause must be clear, enforceable, and enterprise-ready."""
+
+def generate_amendment(original_clause, reason, regulation=None):
+    """Generates an amendment for an existing clause using LangChain LCEL."""
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", SYSTEM_PROMPT_AMEND),
+        ("user", USER_PROMPT_AMEND)
+    ])
+    
+    llm = get_primary_llm(temperature=0.0)
+    chain = prompt | llm | StrOutputParser()
+    
+    amended_clause = chain.invoke({
+        "original_clause": original_clause,
+        "reason": reason,
+        "regulation": regulation if regulation else "General Compliance"
+    })
+
+    return amended_clause.strip()
+
 def generate_compliance_clause(clause_name, regulation):
-    user_prompt = f"""
-Draft a '{clause_name}' clause required under {regulation}.
-The clause must be clear, enforceable, and enterprise-ready.
-"""
-
-    result = chat_completion(
-        system_prompt=SYSTEM_PROMPT_NEW,
-        user_prompt=user_prompt,
-        temperature=0.0
-    )
-
-    return result["content"].strip()
+    """Generates a net-new compliance clause."""
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", SYSTEM_PROMPT_NEW),
+        ("user", USER_PROMPT_NEW)
+    ])
+    
+    llm = get_primary_llm(temperature=0.0)
+    chain = prompt | llm | StrOutputParser()
+    
+    result = chain.invoke({
+        "clause_name": clause_name,
+        "regulation": regulation
+    })
+    
+    return result.strip()
